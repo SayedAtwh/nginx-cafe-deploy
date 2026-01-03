@@ -44,7 +44,7 @@ git clone https://github.com/SayedAtwh/nginx-cafe-deploy.git
 cd nginx-cafe-deploy
 
 # 2️⃣ Build the Docker image
-docker build -t nginx-cafe-deploy .
+docker build -t nginx:website .
 
 # 3️⃣ Run the container
 docker run -d -p 3000:80 nginx-cafe-deploy
