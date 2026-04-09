@@ -1,0 +1,17 @@
+node{
+  git branch: 'main', url: 'https://github.com/SayedAtwh/nginx-cafe-deploy.git'
+ stage('Build') {
+    sh 'echo "Building the application..."'
+    // Add your build commands here
+  }
+  
+  stage('Test') {
+    sh 'echo "Running tests..."'
+    // Add your test commands here
+  }
+  
+  stage('Deploy') {
+    sh 'echo "Deploying the application..."'
+    // Add your deployment commands here
+  } 
+}
