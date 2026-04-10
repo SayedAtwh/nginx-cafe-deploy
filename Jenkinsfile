@@ -9,7 +9,7 @@ node {
         sh 'echo "Running tests..."'
     }
 
-    stagse('Deploy') {
-        'echo "Deploying the application..."'
+    stage('Deploy') {
+        sh 'echo "Deploying the application..."'
     }
 }
