@@ -1,15 +1,40 @@
-node {
-    git branch: 'main', url: 'https://github.com/SayedAtwh/nginx-cafe-deploy.git'
+pipeline {
+    agent any
 
-    stage('Build') {
-        sh 'echo "Building the application..."'
+    stages {
+        stage('Start') {
+            steps {
+                script {
+                    slackSend(
+                        channel: '#all-sayedatwh-devops',
+                        message: "🚀 Build Started: ${env.JOB_NAME} - #${env.BUILD_NUMBER}",
+                        tokenCredentialId: 'slack-secret'
+                    )
+                }
+            }
+        }
+
+        stage('Build') {
+            steps {
+                echo 'Building...'
+            }
+        }
     }
 
-    stage('Test') {
-        sh 'echo "Running tests..."'
-    }
-
-    stage('Deploy') {
-        sh 'echo "Deploying the application..."'
+    post {
+        success {
+            slackSend(
+                channel: '#all-sayedatwh-devops',
+                message: "✅ Build Success: ${env.JOB_NAME} - #${env.BUILD_NUMBER}",
+                tokenCredentialId: 'slack-secret'
+            )
+        }
+        failure {
+            slackSend(
+                channel: '#all-sayedatwh-devops',
+                message: "❌ Build Failed: ${env.JOB_NAME} - #${env.BUILD_NUMBER}",
+                tokenCredentialId: 'slack-secret'
+            )
+        }
     }
 }
