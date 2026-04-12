@@ -7,7 +7,7 @@ pipeline {
                 script {
                     slackSend(
                         channel: '#all-sayedatwh-devops',
-                        message: "message: "🚀 Build Started: ${env.JOB_NAME} - #${env.BUILD_NUMBER}\n🔗 ${env.BUILD_URL}"
+                        message: "🚀 Build Started: ${env.JOB_NAME} - #${env.BUILD_NUMBER}\n🔗 ${env.BUILD_URL}",
                         tokenCredentialId: 'slack-secret'
                     )
                 }
