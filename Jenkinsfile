@@ -18,6 +18,9 @@ pipeline {
 
         stage('Build') {
             steps {
+                script{
+                    sh 'docker run -it -d --name ec2-container -p 4000:80 nginx:lates '
+                }
                 echo 'Building...'
             }
         }
