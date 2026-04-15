@@ -1,9 +1,8 @@
 pipeline {
-    agent ('slave1'){
-        
-    }
+    agent { label 'slave1' }
 
     stages {
+
         stage('Start') {
             steps {
                 script {
@@ -18,10 +17,13 @@ pipeline {
 
         stage('Build') {
             steps {
-                script{
-                    sh 'docker run -it -d --name ec2-container -p 4000:80 nginx:lates '
+                script {
+                    sh '''
+                        docker rm -f ec2-container || true
+                        docker run -d --name ec2-container -p 4000:80 nginx:latest
+                    '''
                 }
-                echo 'Building...'
+                echo 'Container deployed successfully'
             }
         }
     }
@@ -34,6 +36,7 @@ pipeline {
                 tokenCredentialId: 'slack-secret'
             )
         }
+
         failure {
             slackSend(
                 channel: '#all-sayedatwh-devops',
